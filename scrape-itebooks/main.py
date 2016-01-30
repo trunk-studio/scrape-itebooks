@@ -101,6 +101,9 @@ class ItEbooks(CustomUtils):
             # self.log("Error [parse]: 404 " + url)
             return False
 
+        if not soup.find("img", {"itemprop": "image"}):
+            return False
+
         # Find data
         prop['cover_img'] = "http://it-ebooks.info" + soup.find("img", {"itemprop": "image"})['src'].strip()
         prop['title'] = soup.find("h1", {"itemprop": "name"}).getText().strip()
